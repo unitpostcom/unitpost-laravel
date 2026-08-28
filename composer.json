@@ -1,8 +1,9 @@
 {
   "name": "unitpost/laravel",
-  "description": "Laravel integration for the official Unitpost PHP SDK.",
+  "description": "Laravel wrapper for the official Unitpost PHP SDK.",
   "type": "library",
   "license": "MIT",
+  "version": "0.3.0",
   "homepage": "https://www.unitpost.com/docs",
   "support": {
     "issues": "https://github.com/unitpostcom/unitpost-laravel/issues",
@@ -10,16 +11,17 @@
   },
   "require": {
     "php": ">=8.2",
-    "illuminate/support": ">=11.0"
+    "illuminate/support": ">=10.0",
+    "unitpost/unitpost": "^0.3.0"
+  },
+  "autoload": {
+    "psr-4": { "Unitpost\\Laravel\\": "src/" }
   },
   "extra": {
     "laravel": {
       "providers": ["Unitpost\\Laravel\\UnitpostServiceProvider"],
       "aliases": { "Unitpost": "Unitpost\\Laravel\\Facades\\Unitpost" }
     }
-  },
-  "autoload": {
-    "psr-4": { "Unitpost\\Laravel\\": "src/" }
   },
   "minimum-stability": "stable"
 }

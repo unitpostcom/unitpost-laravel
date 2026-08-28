@@ -1,0 +1,10 @@
+{
+  "name": "@unitpost/sdk-laravel",
+  "version": "0.3.0",
+  "description": "Workspace shim for the Laravel SDK (published to Packagist as unitpost/laravel).",
+  "private": true,
+  "scripts": {
+    "test": "echo 'skip: laravel tests run in the dedicated sdks CI job'",
+    "build": "echo 'php sdk: composer package, built in publish-sdk-laravel.yml'"
+  }
+}

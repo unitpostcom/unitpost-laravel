@@ -9,6 +9,7 @@ use Unitpost\Client;
 
 /**
  * @method static mixed email()
+ * @method static mixed sms()
  * @method static mixed contacts()
  * @method static mixed contactFields()
  * @method static mixed segments()

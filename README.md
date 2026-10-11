@@ -19,6 +19,6 @@ $result = Unitpost::email()->send([
 
 The service provider binds `Unitpost\Client` from `UNITPOST_API_KEY` / `config/unitpost.php`.
 
-`Unitpost::sms()` is the SMS channel: **beta, behind the launch gate**. It is wired in its GA shape (send, get, list, brands, numbers, contact SMS consent); while your workspace's gate is off every call returns `404`.
+`Unitpost::sms()` is the SMS channel (send, get, list, brands, numbers, contact SMS consent). Available on paid plans: on the free plan `send` returns a `403` with code `limit_reached`, while the reads keep working.
 
 Docs: https://www.unitpost.com/docs

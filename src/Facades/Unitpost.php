@@ -17,6 +17,7 @@ use Unitpost\Client;
  * @method static mixed webhooks()
  * @method static mixed apiKeys()
  * @method static mixed suppressions()
+ * @method static mixed jobs()
  * @method static mixed usage()
  *
  * @see Client

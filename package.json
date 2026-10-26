@@ -1,6 +1,6 @@
 {
   "name": "@unitpost/sdk-laravel",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Workspace shim for the Laravel SDK (published to Packagist as unitpost/laravel).",
   "private": true,
   "scripts": {

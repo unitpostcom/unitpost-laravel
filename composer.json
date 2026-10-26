@@ -3,7 +3,7 @@
   "description": "Laravel wrapper for the official Unitpost PHP SDK.",
   "type": "library",
   "license": "MIT",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "homepage": "https://www.unitpost.com/docs",
   "support": {
     "issues": "https://github.com/unitpostcom/unitpost-laravel/issues",
@@ -12,7 +12,7 @@
   "require": {
     "php": ">=8.2",
     "illuminate/support": ">=10.0",
-    "unitpost/unitpost": "^0.3.0"
+    "unitpost/unitpost": "^0.4.0"
   },
   "autoload": {
     "psr-4": { "Unitpost\\Laravel\\": "src/" }

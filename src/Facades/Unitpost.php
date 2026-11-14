@@ -15,6 +15,7 @@ use Unitpost\Client;
  * @method static mixed segments()
  * @method static mixed brandKits()
  * @method static mixed libraryImages()
+ * @method static mixed files()
  * @method static mixed branding()
  * @method static mixed workspace()
  * @method static mixed webhooks()

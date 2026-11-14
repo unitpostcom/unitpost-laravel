@@ -5,6 +5,6 @@
   "private": true,
   "scripts": {
     "test": "echo 'skip: laravel tests run in the dedicated sdks CI job'",
-    "build": "echo 'php sdk: composer package, built in publish-sdk-laravel.yml'"
+    "build": "echo 'php sdk: composer package, built in publish-sdk.yml (laravel)'"
   }
 }

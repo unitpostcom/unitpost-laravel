@@ -9,6 +9,22 @@ change that bumps the version (docs/sdk/RELEASING.md).
 
 ## Unreleased
 
+- `SmsFailureCode` gains `sms_not_in_plan`: SMS wasn't on the plan when a text was due (the paid plan ended after its grace, or the plan is 100% discounted). Not charged.
+- SMS numbers and registrations, start to finish (ADR-0160, 2026-11-12):
+  `Unitpost::sms()->getNumber`, `releaseNumber` (permanent);
+  `Unitpost::sms()->registrations`: `get`, `remove` (a 10DLC setup with no
+  number) and `replace` (an approved brand registration).
+- Files and SMS onboarding by API (ADR-0159, 2026-11-12), from the PHP SDK:
+  - `Unitpost::files()` (new): `list(['purpose' => ...])`, `create($body,
+    $idempotencyKey)`, `get($id)`, `delete($id)`. A file (`file_` id) is
+    bytes handed to the API for one `purpose` (`sms_opt_in_evidence`,
+    `sms_document`, `image`), used by `file_id` and expiring after 24 hours.
+  - `Unitpost::sms()`: a brand's documents (`listBrandDocuments`,
+    `addBrandDocument`, `getBrandDocument`, `removeBrandDocument`,
+    `brandDocumentUrl`) and `resubmitNumber` for a toll-free verification
+    carriers sent back; `Unitpost::sms()->registrations`: `resubmit` and
+    `requestNumber`. Every new write mints an Idempotency-Key when you don't
+    pass one.
 - The SMS list takes `sender_id`, a number's `snum_…` id: that number's
   texts, both directions. A value it can't apply is ignored and named in the
   `Unitpost-Warning` response header; `Unitpost-Strict: true` refuses it.

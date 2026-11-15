@@ -9,6 +9,7 @@ change that bumps the version (docs/sdk/RELEASING.md).
 
 ## Unreleased
 
+- `Unitpost::sms()->addContact`, `listJoinKeywords`, `addJoinKeyword`, `removeJoinKeyword`: add a texter as a contact and manage text-to-join keywords.
 - `SmsFailureCode` gains `sms_not_in_plan`: SMS wasn't on the plan when a text was due (the paid plan ended after its grace, or the plan is 100% discounted). Not charged.
 - SMS numbers and registrations, start to finish (ADR-0160, 2026-11-12):
   `Unitpost::sms()->getNumber`, `releaseNumber` (permanent);

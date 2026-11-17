@@ -20,7 +20,10 @@
   "extra": {
     "laravel": {
       "providers": ["Unitpost\\Laravel\\UnitpostServiceProvider"],
-      "aliases": { "Unitpost": "Unitpost\\Laravel\\Facades\\Unitpost" }
+      "aliases": {
+        "Unitpost": "Unitpost\\Laravel\\Facades\\Unitpost",
+        "UnitpostOrganization": "Unitpost\\Laravel\\Facades\\UnitpostOrganization"
+      }
     }
   },
   "minimum-stability": "stable"

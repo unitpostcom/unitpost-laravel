@@ -21,6 +21,29 @@ The service provider binds `Unitpost\Client` from `UNITPOST_API_KEY` / `config/u
 
 `Unitpost::sms()` is the SMS channel (send, get, list, brands, numbers, contact SMS consent). Available on paid plans: on the free plan `send` returns a `403` with code `limit_reached`, while the reads keep working.
 
+## Organization keys
+
+A platform that gives each of its customers a Unitpost workspace uses an organization key (`ok_live_…`, made by an Owner or Admin in the dashboard under Organization → API). Set `UNITPOST_ORG_KEY` and `UNITPOST_ORGANIZATION_ID` (`org_…`); the provider binds `Unitpost\OrganizationClient` from `org_key` and `organization_id` in `config/unitpost.php`, built only when first used, so an app without them boots as usual. The key is never read from `UNITPOST_API_KEY`.
+
+```php
+use Unitpost\Laravel\Facades\UnitpostOrganization;
+
+$ws = UnitpostOrganization::workspaces()->create(['name' => 'Acme', 'external_id' => 'cust_42']);
+$key = UnitpostOrganization::workspaceKeys()->create($ws->data['id'], ['name' => 'backend']); // secret in this answer only
+$acme = new \Unitpost\Client(['apiKey' => $key->data['key']]); // work inside that workspace
+```
+
+| Accessor | Methods |
+| --- | --- |
+| `workspaces()` | `list`, `listAll`, `create`, `get`, `update`, `close`, `restore` |
+| `workspaceKeys()` | `create($workspaceId, $body)` |
+| `webhooks()` | `list`, `listAll`, `create`, `get`, `update`, `delete`, `rotateSecret`, `test`, `listDeliveries` (needs `organizations:write`), `listAllDeliveries`, `replayDelivery`, `flush`, `verify` |
+| `usage()` | `list`, `listAll` |
+| `planQuotes()` | `create`, `get`, `confirm` |
+| `sharedPlan()` | `get`, `listWorkspaces`, `addWorkspace`, `updateWorkspace`, `removeWorkspace` |
+
+`Unitpost::…` (the workspace facade) has none of these.
+
 ## Retries
 
 The client is the PHP SDK's, with its defaults: `429`, `5xx` and transport errors (timeouts, network failures) are retried up to 2 times (3 attempts in all). When the error response carries a `Retry-After` header (a `429` always does), the client waits that long, read as seconds or an HTTP date and capped at 20 seconds. Otherwise it waits with exponential backoff and full jitter: a random time up to 500 ms × 2^attempt, also capped at 20 seconds. Client errors (`401`/`403`/`404`/`409`/`422`) are never retried. Only `GET`s and writes that carry an idempotency key (`email()->send`, `email()->batch` and `sms()->send` always do) are retried; any other write without a key is sent once.

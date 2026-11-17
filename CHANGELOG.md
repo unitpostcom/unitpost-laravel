@@ -9,6 +9,11 @@ change that bumps the version (docs/sdk/RELEASING.md).
 
 ## Unreleased
 
+- `UnitpostOrganization::sharedPlan()`, from the PHP SDK: `get`, `listWorkspaces`, `addWorkspace`, `updateWorkspace`, `removeWorkspace` (the organization's shared plan; adding and removing take an optional idempotency key, or the SDK mints one). Reads need `organizations:read`; the three writes need `organizations:billing`. Buying, upgrading or ending the shared plan stays in the dashboard.
+- SMS tags (from the PHP SDK): `'tags' => [['name' => …, 'value' => …]]` in `Unitpost::sms()->send`'s body (up to 10) and the `tag` filter on `list` / `listAll` (`tag` is `name:value`; several comma-separated must all match; received texts have none).
+- `UnitpostOrganization::webhooks()->listAll()`, `->listAllDeliveries($webhookId)` and `UnitpostOrganization::usage()->listAll()` (pages by `workspace_id`), from the PHP SDK. The delivery log needs `organizations:write`.
+- `Unitpost::spendCaps()` (new, ADR-0172): the workspace's monthly spend caps. `get` reads the SMS-purchase cap, its `max_cents` and what it counted this UTC month; `update` sets or clears it and needs `spend_caps:write`, which no key preset includes. A workspace its organization pays for answers `403 billed_by_organization`.
+- `UnitpostOrganization` facade and a lazily built `Unitpost\OrganizationClient` binding (ADR-0171), from the PHP SDK's new organization client: `UnitpostOrganization::workspaces()`, `workspaceKeys()`, `webhooks()`, `usage()`, `planQuotes()`. Config keys `org_key` (`UNITPOST_ORG_KEY`) and `organization_id` (`UNITPOST_ORGANIZATION_ID`); an app without them boots as usual and the workspace facade is unchanged.
 - `Unitpost::sms()->addContact`, `listJoinKeywords`, `addJoinKeyword`, `removeJoinKeyword`: add a texter as a contact and manage text-to-join keywords.
 - `SmsFailureCode` gains `sms_not_in_plan`: SMS wasn't on the plan when a text was due (the paid plan ended after its grace, or the plan is 100% discounted). Not charged.
 - SMS numbers and registrations, start to finish (ADR-0160, 2026-11-12):

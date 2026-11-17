@@ -24,6 +24,7 @@ use Unitpost\Client;
  * @method static mixed suppressions()
  * @method static mixed jobs()
  * @method static mixed usage()
+ * @method static mixed spendCaps()
  *
  * @see Client
  */

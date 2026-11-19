@@ -9,6 +9,9 @@ change that bumps the version (docs/sdk/RELEASING.md).
 
 ## Unreleased
 
+## 0.5.0
+
+- Requires `unitpost/unitpost` `^0.5.0` (was `^0.4.0`): a Laravel app reaches every operation the PHP SDK gained in 0.5.0 only through this release.
 - `UnitpostOrganization::sharedPlan()`, from the PHP SDK: `get`, `listWorkspaces`, `addWorkspace`, `updateWorkspace`, `removeWorkspace` (the organization's shared plan; adding and removing take an optional idempotency key, or the SDK mints one). Reads need `organizations:read`; the three writes need `organizations:billing`. Buying, upgrading or ending the shared plan stays in the dashboard.
 - SMS tags (from the PHP SDK): `'tags' => [['name' => …, 'value' => …]]` in `Unitpost::sms()->send`'s body (up to 10) and the `tag` filter on `list` / `listAll` (`tag` is `name:value`; several comma-separated must all match; received texts have none).
 - `UnitpostOrganization::webhooks()->listAll()`, `->listAllDeliveries($webhookId)` and `UnitpostOrganization::usage()->listAll()` (pages by `workspace_id`), from the PHP SDK. The delivery log needs `organizations:write`.

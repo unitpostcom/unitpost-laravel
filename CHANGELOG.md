@@ -9,6 +9,11 @@ change that bumps the version (docs/sdk/RELEASING.md).
 
 ## Unreleased
 
+## 0.6.0
+
+- Requires `unitpost/unitpost` `^0.6.0` (was `^0.5.0`): a Laravel app reaches every operation the PHP SDK gained in 0.6.0 only through this release.
+- Set one custom field on many contacts (from the PHP SDK, through `Unitpost::contacts()`): `contacts()->setField($body, $idempotencyKey)` (`key`, `value`, (exactly one of `contact_ids` or `emails`, up to 1,000, or `segment_id`; `only_empty` keeps the values contacts already have). It answers the job (202); follow it with `jobs()->get($id)`. The SDK mints an idempotency key when you pass none, so a retry answers the same job. Needs `contacts:write` (a segment also `segments:read`). `segments()->addMember` also takes a list (`contact_ids` or `emails`, up to 1,000).
+
 ## 0.5.0
 
 - Requires `unitpost/unitpost` `^0.5.0` (was `^0.4.0`): a Laravel app reaches every operation the PHP SDK gained in 0.5.0 only through this release.
